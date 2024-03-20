@@ -49,9 +49,6 @@ void NoFlash() {
 
 
 int main() {
-	auto mem = Memory("csgo.exe");
-	const auto client = mem.GetModuleAddress("client.dll");
-
 	while (1) {
 		std::thread Thread1(ThreadESP);
 		Thread1.join();
