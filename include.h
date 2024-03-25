@@ -19,3 +19,6 @@
 
 using namespace offsets::signatures;
 using namespace offsets::netvars;
+
+inline std::uintptr_t g_client_base;
+
