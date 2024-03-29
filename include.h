@@ -21,4 +21,8 @@ using namespace offsets::signatures;
 using namespace offsets::netvars;
 
 inline std::uintptr_t g_client_base;
+<<<<<<< HEAD
 inline Memory g_mem;
+=======
+
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5

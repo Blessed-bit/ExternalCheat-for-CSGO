@@ -2,6 +2,7 @@
 
 
 void ThreadESP() {
+<<<<<<< HEAD
 	while (1) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		const auto Color = color(220.f, 20.f, 60.f);
@@ -12,30 +13,56 @@ void ThreadESP() {
 		const auto glowObjectManager = g_mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwGlowObjectManager);
 
 		if (!localPlayer) continue;
+=======
+	while (true){
+        std::this_thread::sleep_for(chrono::milliseconds(10));
+	const auto Color = color(231.f, 135.f, 0.f);
+	const auto Bo = bo(true, true);
+
+	const auto localPlayer = mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwLocalPlayer);
+        if( !localPlayer ) continue;
+
+	const auto glowObjectManager = mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwGlowObjectManager);
+        if( !glowObjectManager ) continue;
+
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 
 		for (int i = 0; i < 64; ++i) {
+<<<<<<< HEAD
 			const auto entity = g_mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwEntityList + i * 0x10);
 			const auto c4planted = g_mem.Read<std::uintptr_t>(g_client_base + offsets::netvars::m_bBombTicking);
 			if (c4planted) {
 				std::cout << c4planted << std::endl;
 			}
+=======
+			const auto entity = mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwEntityList + i * 0x10);
+			const auto weapon = mem.Read<std::uintptr_t>(g_client_base + offsets::netvars::m_flFlashDuration + i * 0x10);
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 
 			if (g_mem.Read<std::uintptr_t>(entity + offsets::netvars::m_iTeamNum) == g_mem.Read<std::uintptr_t>(localPlayer + offsets::netvars::m_iTeamNum)) continue;
 
 			const auto glowIndexC4 = g_mem.Read<std::int32_t>(c4planted + offsets::netvars::m_iGlowIndex);
 			const auto glowIndex = g_mem.Read<std::int32_t>(entity + offsets::netvars::m_iGlowIndex);
 
+<<<<<<< HEAD
 		
 			g_mem.Write<color>(glowObjectManager + (glowIndex * 0x38) + 0x8, Color); // color
 			g_mem.Write<bo>(glowObjectManager + (glowIndex * 0x38) + 0x27, Bo);
 
 			g_mem.Write<ñolorc4>(glowObjectManager + (glowIndexC4 * 0x38) + 0x8, ÑolorC4); // color
 			g_mem.Write<bo>(glowObjectManager + (glowIndexC4 * 0x38) + 0x27, Bo);
+=======
+			mem.Write<color>(glowObjectManager + (glowIndex * 0x38) + 0x8, Color); // color
+			mem.Write<bo>(glowObjectManager + (glowIndex * 0x38) + 0x27, Bo);
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 		}
 	}
+    }
+
 }
 
 void ThreadBhop() {
+<<<<<<< HEAD
 	while (1) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		if (GetAsyncKeyState(VK_SPACE)) {
@@ -46,9 +73,23 @@ void ThreadBhop() {
 			const auto onGround = g_mem.Read<bool>(localPlayer + offsets::netvars::m_fFlags);
 			g_mem.Write<BYTE>(g_client_base + offsets::signatures::dwForceJump, 6);
 		}
+=======
+	while (true) {
+        std::this_thread::sleep_for(chrono::milliseconds(10));
+	if( GetAsyncKeyState( VK_SPACE ) ){
+		
+	 const auto localPlayer = mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwLocalPlayer);
+	 if( !localPlayer ) continue;
+		
+	 const auto onGround = mem.Read<bool>(localPlayer + offsets::netvars::m_fFlags);
+	 mem.Write<BYTE>(client + offsets::signatures::dwForceJump, 6);
+	 }
+		
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 	}
 }
 
+<<<<<<< HEAD
 void ThreadNoFlash() {
 	while (1) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -56,6 +97,15 @@ void ThreadNoFlash() {
 
 		g_mem.Write<float>(localPlayer + offsets::netvars::m_flFlashMaxAlpha, 145.f);
 	}
+=======
+void NoFlash() {
+ while (true){
+        std::this_thread::sleep_for(chrono::milliseconds(10));
+	const auto localPlayer = mem.Read<std::uintptr_t>(g_client_base + offsets::signatures::dwLocalPlayer);
+	mem.Write<float>(localPlayer + offsets::netvars::m_flFlashMaxAlpha, 0.f);
+ }
+
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 }
 
 void Fov() {
@@ -92,6 +142,7 @@ void Rendering(auto &hdc) {
 }
 
 int main() {
+<<<<<<< HEAD
 	g_client_base = g_mem.GetModuleAddress("client.dll");
 	std::thread Thread1(ThreadESP);
 	std::thread Thread2(ThreadBhop);
@@ -110,5 +161,22 @@ int main() {
 
 	if (getchar())
 		return 0;
+=======
+	
+                auto mem = Memory("csgo.exe");
+	        g_client_base = mem.GetModuleAddress("client.dll");
+	
+		std::thread Thread1(ThreadESP);
+                std::thread Thread2(ThreadBhop);
+                std::thread Thread3(NoFlash);
+	
+		Thread1.detach();
+                Thread2.detach();
+                Thread3.detach();
+		
+  if( getchar() )
+	  return 0;
+
+>>>>>>> 2ecc88bb2c945c9a6373089e7bd9f6011df627e5
 }
 
