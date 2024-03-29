@@ -8,8 +8,10 @@ private:
 	void* processHandle = nullptr;
 
 public:
-	Memory(const std::string_view processName) noexcept
+	Memory() noexcept
 	{
+		const std::string_view processName = "csgo.exe";
+
 		::PROCESSENTRY32 entry = { };
 		entry.dwSize = sizeof(::PROCESSENTRY32);
 

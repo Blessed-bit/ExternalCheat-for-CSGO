@@ -15,7 +15,10 @@
 #include "memory.h"
 #include "offsets.h"
 #include "Color.h"
-#include "HeaderClass.h"
+#include "InitClass.h"
 
 using namespace offsets::signatures;
 using namespace offsets::netvars;
+
+inline std::uintptr_t g_client_base;
+inline Memory g_mem;

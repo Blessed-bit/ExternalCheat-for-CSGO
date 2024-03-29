@@ -92,6 +92,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,8 +131,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
-    <ClInclude Include="HeaderClass.h" />
     <ClInclude Include="include.h" />
+    <ClInclude Include="InitClass.h" />
     <ClInclude Include="memory.h" />
     <ClInclude Include="offsets.h" />
   </ItemGroup>

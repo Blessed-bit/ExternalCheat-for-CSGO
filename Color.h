@@ -5,7 +5,12 @@ struct color {
 	constexpr color(float r, float g, float b, float a = 1.f) noexcept :
 		r(r), b(b), g(g), a(a) {};
 	float r, g, b, a;
-	bool x, y;
+};
+
+struct ñolorc4 {
+	constexpr ñolorc4(float r, float g, float b, float a = 1.f) noexcept :
+		r(r), b(b), g(g), a(a) {};
+	float r, g, b, a;
 };
 
 struct bo {
